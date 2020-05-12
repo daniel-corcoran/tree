@@ -1,0 +1,1 @@
+# Uninstall a previously installed application

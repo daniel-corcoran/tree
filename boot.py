@@ -7,11 +7,18 @@ from waitress import serve
 
 @app.route("/")
 def home_page():
-    return render_template('base.html')
+    return render_template('view.html')
 # Initialize flask server on boot
 
-if __name__ == '__main__':
+@app.route('/config')
+def init_config():
+    return render_template('config.html')
 
+@app.route('/view')
+def init_view():
+    return render_template('view.html')
+
+if __name__ == '__main__':
     print("Server program has begin. Beginning service.")
     try:
         print("Attempting to open on port 80")
