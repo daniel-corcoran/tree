@@ -3,7 +3,17 @@ from flask import render_template
 from flask import request
 from app import app
 from waitress import serve
+from tools.power import reboot, power_off
 
+
+
+@app.route("/reboot")
+def reboot_helper():
+    reboot()
+
+@app.route("/power_off")
+def power_off_helper():
+    power_off()
 
 @app.route("/")
 def home_page():

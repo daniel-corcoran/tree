@@ -3,3 +3,20 @@
 {% block link %}
 <a href="/view">📹</a>
 {% endblock %}
+
+{% block content %}
+<div id="switch_app_div"></div>
+<div id="install_app_div"></div>
+<div id="uninstall_app_div"></div>
+<div id="power_settings_div">
+    <form action="/reboot">
+        <input type="submit" value="Reboot device" />
+    </form>
+    <form action="/power_off">
+        <input type="submit" value="Power off device" />
+    </form>
+
+</div>
+
+{% endblock %}
+
