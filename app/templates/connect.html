@@ -1,1 +1,35 @@
 <h1>Waiting for new connection...</h1>
+<script>
+    function ifServerOnline(ifOnline, ifOffline)
+    {
+        var img = document.body.appendChild(document.createElement("img"));
+        img.onload = function()
+        {
+            ifOnline && ifOnline.constructor == Function && ifOnline();
+        };
+        img.onerror = function()
+        {
+            ifOffline && ifOffline.constructor == Function && ifOffline();
+        };
+        img.src = "http://tree.local/static/webasset/img/ping.png";
+    }
+
+    function update()
+    {
+        ifServerOnline(function()
+         {
+            console.log("Online code");
+            //  server online code here
+         },
+        function ()
+        {
+            console.log("Offline code");
+            //  server offline code here
+        });
+
+
+    }
+   setinterval (function() { update();}, 500);
+
+</script>
+
