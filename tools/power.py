@@ -4,7 +4,7 @@ import os
 # FIXME: This is not secure. We don't want users to have sudo access.
 
 def power_off():
-    p = os.system('echo %s|sudo -S %s' % ('mendel', 'poweroff'))
+    p = os.system('echo %s|sudo -S %s' % ('tree2020', 'poweroff'))
 
 def reboot():
-    p = os.system('echo %s|sudo -S %s' % ('mendel', 'reboot now'))
+    p = os.system('echo %s|sudo -S %s' % ('tree2020', 'reboot now'))
