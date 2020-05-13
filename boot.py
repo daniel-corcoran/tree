@@ -13,7 +13,7 @@ from app import app
 from tools.power import reboot, power_off
 from tools.update import update
 from imutils.video import VideoStream
-
+from tools import LED
 
 outputFrame = None
 lock = threading.Lock()
@@ -106,12 +106,15 @@ def video_feed():
 
 @app.route("/update")
 def update_helper():
+    LED.blue()
     update()
+    LED.green()
     return init_config()
 
 
 @app.route("/upload")
 def upload():
+    LED.blue()
     # user has uploaded a new file. We need to parse and install it.
     ...
     # TODO
@@ -119,6 +122,7 @@ def upload():
 
 @app.route("/reboot")
 def reboot_helper():
+    LED.red()
     reboot()
     return render_template("connect.html")
 
@@ -147,12 +151,12 @@ def init_view():
 
 
 if __name__ == '__main__':
+    LED.green()
+
     # Start the current application as a daemon process
     t = threading.Thread(target=detect_motion, args=(32,))
     t.daemon = True
     t.start()
-
-
 
     print("Server program has begin. Beginning service.")
     try:
