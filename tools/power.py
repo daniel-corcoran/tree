@@ -5,6 +5,6 @@ import os
 
 def power_off():
     p = os.system('echo %s|sudo -S %s' % ('tree2020', 'poweroff'))
-
+    #
 def reboot():
     p = os.system('echo %s|sudo -S %s' % ('tree2020', 'reboot now'))
