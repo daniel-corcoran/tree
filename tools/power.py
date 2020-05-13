@@ -8,5 +8,5 @@ def power_off():
     print(p)
 
 def reboot():
-    p = os.system('echo %s|sudo -S %s' % ('tree2020', '( sleep 5 ; shutdown ) & '))
+    p = os.system('echo %s|sudo -S %s' % ('tree2020', '( sleep 5 ; reboot ) & '))
     print(p)
