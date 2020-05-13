@@ -6,6 +6,11 @@ from waitress import serve
 from tools.power import reboot, power_off
 
 
+@app.route("/upload")
+def upload():
+    # user has uploaded a new file. We need to parse and install it.
+    ...
+    # TODO
 
 @app.route("/reboot")
 def reboot_helper():
