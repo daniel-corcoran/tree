@@ -4,7 +4,12 @@ from flask import request
 from app import app
 from waitress import serve
 from tools.power import reboot, power_off
+from tools.update import update
 
+@app.route("/update")
+def update_helper():
+    update()
+    return init_config()
 
 @app.route("/upload")
 def upload():
