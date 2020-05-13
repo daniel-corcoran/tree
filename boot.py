@@ -6,6 +6,9 @@ from waitress import serve
 from tools.power import reboot, power_off
 from tools.update import update
 
+
+
+
 @app.route("/update")
 def update_helper():
     update()
@@ -20,11 +23,13 @@ def upload():
 @app.route("/reboot")
 def reboot_helper():
     reboot()
+    return render_template("connect.html")
+
 
 @app.route("/power_off")
 def power_off_helper():
     power_off()
-
+    return render_template("connect.html")
 @app.route("/")
 def home_page():
     return render_template('view.html')
