@@ -30,7 +30,6 @@ print("Default app: {}".format(default_app))
 
 my_program = importlib.import_module('programs.{}.main'.format(default_app))
 
-outputFrame = None
 
 
 

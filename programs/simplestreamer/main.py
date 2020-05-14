@@ -49,7 +49,7 @@ def thread():
         # read the next frame from the video stream, resize it,
         # convert the frame to grayscale, and blur it
         frame = vs.read()
-        frame = imutils.resize(frame, width=40)
+        frame = imutils.resize(frame, width=1000)
 
         # grab the current timestamp and draw it on the frame
         timestamp = datetime.datetime.now()
