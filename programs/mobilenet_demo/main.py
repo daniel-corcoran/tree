@@ -44,7 +44,7 @@ def generate():
 
 		# make predictions on the input frame
 		start = time.time()
-		results = model.ClassifyWithImage(frame, top_k=1)
+		results = model.classify_with_image(frame, top_k=1)
 		end = time.time()
 		# ensure at least one result was found
 		if len(results) > 0:
