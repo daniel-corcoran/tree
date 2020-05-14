@@ -162,7 +162,7 @@ def init_view():
 
 if __name__ == '__main__':
     LED.green()
-
+    #
     # Start the current application as a daemon process
     print("Initializing application thread.")
     t = threading.Thread(target=my_program.thread)
