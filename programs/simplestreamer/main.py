@@ -37,7 +37,7 @@ def generate():
                bytearray(encodedImage) + b'\r\n')
 
 
-def thread(frameCount):
+def thread():
     # grab global references to the video stream, output frame, and
     # lock variables
     global vs, outputFrame, lock

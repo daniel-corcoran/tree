@@ -91,7 +91,7 @@ class SingleMotionDetector:
 		return (thresh, (minX, minY, maxX, maxY))
 
 
-def thread(frameCount):
+def thread(frameCount = 32):
     # grab global references to the video stream, output frame, and
     # lock variables
     global vs, outputFrame, lock

@@ -165,7 +165,7 @@ if __name__ == '__main__':
 
     # Start the current application as a daemon process
     print("Initializing application thread.")
-    t = threading.Thread(target=my_program.thread, args=(32,))
+    t = threading.Thread(target=my_program.thread)
     t.daemon = True
     t.start()
 
