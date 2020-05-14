@@ -163,10 +163,6 @@ if __name__ == '__main__':
     LED.green()
     #
     # Start the current application as a daemon process
-    print("Initializing application thread.")
-    t = threading.Thread(target=my_program.thread)
-    t.daemon = True
-    t.start()
 
     print("Server program has begin. Beginning service.")
     try:
