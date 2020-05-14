@@ -18,7 +18,6 @@ def generate():
 
     # loop over frames from the output stream
     while True:
-        time.sleep = (0.1)
         # wait until the lock is acquired
         with lock:
             # check if the output frame is available, otherwise skip
@@ -48,7 +47,6 @@ def thread():
 
     # loop over frames from the video stream
     while True:
-        time.sleep(0.1)
         # read the next frame from the video stream, resize it,
         # convert the frame to grayscale, and blur it
         frame = vs.read()
