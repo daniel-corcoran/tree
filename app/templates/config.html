@@ -33,6 +33,9 @@
 <hr>
 
 <div id="update_div">
+    {% if up_to_date == True %}
+    <h5>System has latest updates.</h5>
+    {% endif%}
     <form action="/update">
           <input type="submit" value="System update">
     </form>

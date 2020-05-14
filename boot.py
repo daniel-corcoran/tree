@@ -69,11 +69,12 @@ def video_feed():
 def update_helper():
     # TODO: If an update has been applied, restart the device. Ask the user first. Otherwise, return "No updates"
     LED.blue()
-    update()
+    p = update()
     LED.green()
-
-
-    return init_config()
+    if p == "Already up to date.":
+        return init_config(up_to_date = True)
+    else:
+        return render_template('reboot.html', msg = p)
 
 
 @app.route("/upload", methods=['GET', 'POST'])
@@ -148,10 +149,10 @@ def home_page():
 
 
 @app.route('/config')
-def init_config():
+def init_config(up_to_date=False):
     x = list_apps()
     print(x)
-    return render_template('config.html', list_apps = x, current_app = default_app)
+    return render_template('config.html', list_apps = x, current_app = default_app, up_to_date = up_to_date)
 
 
 @app.route('/view')
