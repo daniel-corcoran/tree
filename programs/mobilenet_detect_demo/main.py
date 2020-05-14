@@ -1,4 +1,4 @@
-from edgetpu.classification.engine import DetectionEngine
+from edgetpu.detection.engine import DetectionEngine
 from imutils.video import VideoStream
 from PIL import Image
 import imutils
