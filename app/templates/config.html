@@ -13,10 +13,19 @@
     </form>
 </div>
 <hr>
+<div id="app_config_div" >
+    <h5>Current running app: </h5> <p>{{ current_app }}</p>
+    <h5>Installed apps:</h5>
 
-<div id="app_config_div">
-    <h3>My apps</h3>
-    {{list_apps}}
+    <form action = '/app_change_request' method = "post" enctype="multipart/form-data">
+        {% for item in list_apps %}
+            <p>{{ item }}<input type="submit" name="switch {{ item }}" value="Run" id="switch">
+                <input type="submit" name="uninstall {{ item }}" value="Uninstall" id="uninstall"></p>
+        {% endfor %}
+    </form>
+
+
+
     <!--List installed apps and set active / uninstall specific apps -->
 </div>
 

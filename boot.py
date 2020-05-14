@@ -11,6 +11,10 @@ import os
 from werkzeug.utils import secure_filename
 
 from flask import flash, request, redirect, url_for
+from tools.switch import switch
+
+from tools.uninstall import uninstall
+
 UPLOAD_FOLDER = 'database/tmp'
 ALLOWED_EXTENSIONS = {'tree'}
 def allowed_file(filename):
@@ -28,13 +32,20 @@ my_program = importlib.import_module('programs.{}.main'.format(default_app))
 
 outputFrame = None
 
+
+
+
 def list_apps():
     list_of_apps = os.listdir('programs')
+
     new_l = []
+
     for x in list_of_apps:
-        if x != "__pycache__":
+        if x != "__pycache__" and x != default_app:
             new_l.append(x)
     return new_l
+
+
 
 @app.route("/IRoff")
 def irOFF():
@@ -60,6 +71,8 @@ def update_helper():
     LED.blue()
     update()
     LED.green()
+
+
     return init_config()
 
 
@@ -91,6 +104,29 @@ def upload():
 
 
     # user has uploaded a new file. We need to parse and install it.
+@app.route("/app_change_request", methods=['GET', 'POST'])
+def app_mod_process():
+    x = request.form
+    cmd = [i for i in x]
+    print("Command received:", cmd)
+    do = cmd[0].split()[0]
+    target = cmd[0].split()[1]
+    print(do, target)
+    # Should be "Switch" x
+    # or "Uninstall x"
+    if do == "switch":
+        # Switch target
+        switch(target)
+        return init_config() # TODO: Add message notifying that reboot is required.
+
+    elif do =="uninstall":
+        # Uninstall target
+        uninstall(target)
+        return init_config
+
+
+    return "Check console"
+
 
 
 @app.route("/reboot")
@@ -115,7 +151,7 @@ def home_page():
 def init_config():
     x = list_apps()
     print(x)
-    return render_template('config.html', list_apps = x)
+    return render_template('config.html', list_apps = x, current_app = default_app)
 
 
 @app.route('/view')
