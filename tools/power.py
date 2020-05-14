@@ -12,4 +12,4 @@ def reboot():
     print(p)
 
 def restart_client():
-    os.execl('/etc/rc.local', '')
+    os.execl('/etc/rc.local', [''])
