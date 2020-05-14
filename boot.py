@@ -46,7 +46,6 @@ def list_apps():
     return new_l
 
 
-
 @app.route("/IRtog")
 def irTog():
     global ir
