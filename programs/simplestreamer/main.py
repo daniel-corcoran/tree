@@ -1,5 +1,4 @@
 # import the necessary packages
-import numpy as np
 import imutils
 import cv2
 import datetime
@@ -50,7 +49,7 @@ def thread():
         # read the next frame from the video stream, resize it,
         # convert the frame to grayscale, and blur it
         frame = vs.read()
-        frame = imutils.resize(frame, width=400)
+        frame = imutils.resize(frame, width=40)
 
         # grab the current timestamp and draw it on the frame
         timestamp = datetime.datetime.now()
