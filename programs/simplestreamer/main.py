@@ -13,6 +13,7 @@ def generate():
     """Video streaming generator function."""
     while True:
         frame = vc.read()
+        frame = imutils.resize(frame, width=400) # To save bandwidth?
         cv2.imwrite('pic.jpg', frame)
         yield (b'--frame\r\n'
                b'Content-Type: image/jpeg\r\n\r\n' + open('pic.jpg', 'rb').read() + b'\r\n')
