@@ -118,7 +118,7 @@ def app_mod_process():
     if do == "switch":
         # Switch target
         switch(target)
-        return init_config() # TODO: Add message notifying that reboot is required.
+        return render_template("reboot.html")
 
     elif do =="uninstall":
         # Uninstall target
