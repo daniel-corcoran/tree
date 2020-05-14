@@ -5,14 +5,14 @@ import datetime
 import time
 from imutils.video import VideoStream
 
-vc = cv2.VideoCapture(0)
+vc = VideoStream(src=0).start()
 time.sleep(2.0)
 
 
 def generate():
     """Video streaming generator function."""
     while True:
-        rval, frame = vc.read()
+        frame = vc.read()
         cv2.imwrite('pic.jpg', frame)
         yield (b'--frame\r\n'
                b'Content-Type: image/jpeg\r\n\r\n' + open('pic.jpg', 'rb').read() + b'\r\n')
