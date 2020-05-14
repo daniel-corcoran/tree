@@ -47,6 +47,7 @@ def thread():
 
     # loop over frames from the video stream
     while True:
+        time.sleep(0.1)
         # read the next frame from the video stream, resize it,
         # convert the frame to grayscale, and blur it
         frame = vs.read()
