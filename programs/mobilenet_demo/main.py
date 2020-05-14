@@ -60,4 +60,3 @@ def generate():
 		yield (b'--frame\r\n'
 			   b'Content-Type: image/jpeg\r\n\r\n' + open('pic.jpg', 'rb').read() + b'\r\n')
 
-vs.stop()
