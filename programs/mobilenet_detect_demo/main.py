@@ -1,7 +1,6 @@
-from edgetpu.classification.engine import ClassificationEngine
+from edgetpu.classification.engine import DetectionEngine
 from imutils.video import VideoStream
 from PIL import Image
-import argparse
 import imutils
 import time
 import cv2
@@ -19,7 +18,7 @@ for row in open('programs/mobilenet_detect_demo/mobilenet_ssd_v2/coco_labels.txt
 
 # load the Google Coral classification model
 print("[INFO] loading Coral model...")
-model = ClassificationEngine('programs/mobilenet_detect_demo/mobilenet_ssd_v2/mobilenet_ssd_v2_coco_quant_postprocess_edgetpu.tflite')
+model = DetectionEngine('programs/mobilenet_detect_demo/mobilenet_ssd_v2/mobilenet_ssd_v2_coco_quant_postprocess_edgetpu.tflite')
 
 # initialize the video stream and allow the camera sensor to warmup
 print("[INFO] starting video stream...")
