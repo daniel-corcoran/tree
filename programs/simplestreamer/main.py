@@ -5,6 +5,7 @@ import datetime
 import time
 from imutils.video import VideoStream
 
+
 vc = VideoStream(src=0).start()
 time.sleep(2.0)
 
@@ -14,7 +15,7 @@ def generate():
     while True:
         frame = vc.read()
         frame = imutils.resize(frame, width=400) # To save bandwidth?
-        cv2.imwrite('pic.jpg', frame)
+        by = cv2.imencode('.jpg', frame)[1].tostring()
         yield (b'--frame\r\n'
-               b'Content-Type: image/jpeg\r\n\r\n' + open('pic.jpg', 'rb').read() + b'\r\n')
+               b'Content-Type: image/jpeg\r\n\r\n' + by + b'\r\n')
 
