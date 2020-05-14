@@ -44,14 +44,16 @@
 <hr>
 
 <div id="ir_settings_div">
-    <h3>IR LED (Night Vision)</h3>
-
-    <form action="/IRon">
-        <input type="submit" value="On" />
-    </form>
-    <form action="/IRoff">
-        <input type="submit" value="Off" />
-    </form>
+    <h3>Night Vision</h3>
+    {% if ir == True %}
+        <form action="/IRtog">
+            <input type="submit" value="Turn off">
+        </form>
+    {% else %}
+        <form action="/IRtog">
+            <input type="submit" value="Turn on">
+        </form>
+    {% endif %}
 
 </div>
 <hr>

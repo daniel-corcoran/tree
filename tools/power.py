@@ -10,3 +10,7 @@ def power_off():
 def reboot():
     p = os.system('echo %s|sudo -S %s' % ('tree2020', ' sleep 5 && reboot & '))
     print(p)
+
+def restart_client():
+    p = os.execl('echo %s|sudo -S %s' % ('tree2020', 'nohup python3 boot.py & '))
+    print(p)

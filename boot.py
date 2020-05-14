@@ -3,7 +3,7 @@ from flask import render_template
 from flask import Response
 import threading
 from app import app
-from tools.power import reboot, power_off
+from tools.power import reboot, power_off, restart_client
 from tools.update import update
 from tools import LED
 import importlib
@@ -30,6 +30,7 @@ print("Default app: {}".format(default_app))
 
 my_program = importlib.import_module('programs.{}.main'.format(default_app))
 
+ir = False
 
 
 
@@ -46,16 +47,23 @@ def list_apps():
 
 
 
-@app.route("/IRoff")
+@app.route("/IRtog")
+def irTog():
+    global ir
+    if ir:
+        irOFF()
+        ir = False
+    else:
+        irON()
+        ir = True
+    return init_config()
+
 def irOFF():
     LED.IRoff()
-    return init_config()
 
 
-@app.route("/IRon")
 def irON():
     LED.IRon()
-    return init_config()
 
 
 @app.route("/video_feed")
@@ -73,7 +81,7 @@ def update_helper():
     if p == "Already up to date.":
         return init_config(up_to_date = True)
     else:
-        return render_template('reboot.html', msg = p)
+        restart_client()
 
 
 @app.route("/upload", methods=['GET', 'POST'])
@@ -150,8 +158,7 @@ def home_page():
 @app.route('/config')
 def init_config(up_to_date=False):
     x = list_apps()
-    print(x)
-    return render_template('config.html', list_apps = x, current_app = default_app, up_to_date = up_to_date)
+    return render_template('config.html', list_apps = x, current_app = default_app, up_to_date = up_to_date, ir=ir)
 
 
 @app.route('/view')
