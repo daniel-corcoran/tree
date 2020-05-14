@@ -5,17 +5,23 @@
 {% endblock %}
 
 {% block content %}
+<hr>
 <div id="install_app_div">
-    <form action="/upload">
-        <input type="submit" value="Upload a new application">
+    <form action="/upload" method=post enctype="multipart/form-data">
+        <input type=file name=file>
+        <input type="submit" value="Upload application">
     </form>
 </div>
-
+<hr>
 
 <div id="app_config_div">
-    <h1>My apps</h1>
+    <h3>My apps</h3>
+    {{list_apps}}
     <!--List installed apps and set active / uninstall specific apps -->
 </div>
+
+
+<hr>
 
 <div id="update_div">
     <form action="/update">
@@ -23,6 +29,20 @@
     </form>
 </div>
 
+<hr>
+
+<div id="ir_settings_div">
+    <h3>IR LED (Night Vision)</h3>
+
+    <form action="/IRon">
+        <input type="submit" value="On" />
+    </form>
+    <form action="/IRoff">
+        <input type="submit" value="Off" />
+    </form>
+
+</div>
+<hr>
 <div id="power_settings_div">
     <h3>Device power</h3>
     <form action="/reboot">
