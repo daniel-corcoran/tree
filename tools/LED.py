@@ -26,10 +26,11 @@ try:
             b.write(True)
 
     def IRon():
-        ir.write(True)
+        # I know it's backwards.
+        ir.write(False)
 
     def IRoff():
-        ir.write(False)
+        ir.write(True)
 except:
     print("Using dummy LED controls")
     def red():
