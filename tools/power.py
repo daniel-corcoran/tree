@@ -12,5 +12,4 @@ def reboot():
     print(p)
 
 def restart_client():
-    p = os.execl('echo %s|sudo -S %s' % ('tree2020', 'nohup python3 boot.py & '))
-    print(p)
+    os.execl('boot.py')
