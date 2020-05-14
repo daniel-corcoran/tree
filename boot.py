@@ -172,11 +172,11 @@ if __name__ == '__main__':
     print("Server program has begin. Beginning service.")
     try:
         print("Attempting to open on port 80")
-        app.run(host='0.0.0.0', port='80', debug=True,
+        app.run(host='0.0.0.0', port='80', debug=False,
                 threaded=False, processes=2, use_reloader=False)
         #serve(app, host='0.0.0.0', port=80)
     except:
         print("Unsuccessful. Attempting on port 8000")
-        app.run(host='0.0.0.0', port='8000', debug=True,
+        app.run(host='0.0.0.0', port='8000', debug=False,
                 threaded=False, processes=2, use_reloader=False)
     print("Main sequence closed. The program has ended")
