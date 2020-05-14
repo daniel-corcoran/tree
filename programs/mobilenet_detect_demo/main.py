@@ -12,14 +12,14 @@ print("[INFO] parsing class labels...")
 labels = {}
 
 # loop over the class labels file
-for row in open('programs/mobilenet_demo/mobilenet_v2/imagenet_labels.txt'):
+for row in open('programs/mobilenet_detect_demo/mobilenet_ssd_v2/coco_labels.txt'):
 	# unpack the row and update the labels dictionary
 	(classID, label) = row.strip().split(maxsplit=1)
 	labels[int(classID)] = label.strip()
 
 # load the Google Coral classification model
 print("[INFO] loading Coral model...")
-model = ClassificationEngine('programs/mobilenet_demo/mobilenet_v2/mobilenet_v2_1.0_224_quant_edgetpu.tflite')
+model = ClassificationEngine('programs/mobilenet_detect_demo/mobilenet_ssd_v2/mobilenet_ssd_v2_coco_quant_postprocess_edgetpu.tflite')
 
 # initialize the video stream and allow the camera sensor to warmup
 print("[INFO] starting video stream...")
