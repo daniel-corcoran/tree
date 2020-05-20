@@ -2,9 +2,9 @@ try:
     from periphery import GPIO
 
 
-    r = GPIO(77, "out")
-    g = GPIO(73, "out")
-    b = GPIO(138, "out")
+    b = GPIO(77, "out") # Actually blue
+    r = GPIO(73, "out") # Actually red
+    g = GPIO(138, "out") # Actually green
     ir = GPIO(141, "out")
 
     def red():
