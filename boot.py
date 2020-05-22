@@ -124,7 +124,7 @@ def app_mod_process():
     if do == "switch":
         # Switch target
         switch(target)
-        return render_template("reboot.html")
+        restart_client()
 
     elif do =="uninstall":
         # Uninstall target
