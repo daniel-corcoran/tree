@@ -1,13 +1,12 @@
 import os
 import numpy as np
 from PIL import Image
-from pose_engine import PoseEngine
+from programs.pose_detect.pose_engine import PoseEngine
 import imutils
 import cv2
 import datetime
 import time
 from imutils.video import VideoStream
-import svgwrite
 
 # TODO: Implement a generator function that returns serialized
 # images to the webpage.
