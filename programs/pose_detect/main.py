@@ -19,7 +19,7 @@ vc = VideoStream(src=0).start()
 #vs = VideoStream(usePiCamera=False).start()
 time.sleep(2.0)
 
-engine = PoseEngine('models/mobilenet/posenet_mobilenet_v1_075_481_641_quant_decoder_edgetpu.tflite')
+engine = PoseEngine('programs/pose_detect/models/mobilenet/posenet_mobilenet_v1_075_481_641_quant_decoder_edgetpu.tflite')
 
 def draw_image(frame, pose):
     # add a pose to the frame, then return the frame.
