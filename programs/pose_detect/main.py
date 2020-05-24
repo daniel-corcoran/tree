@@ -22,9 +22,20 @@ time.sleep(2.0)
 
 engine = PoseEngine('models/mobilenet/posenet_mobilenet_v1_075_481_641_quant_decoder_edgetpu.tflite')
 
-def generator():
+def draw_image(frame, pose):
+    # add a pose to the frame, then return the frame.
+    for label, keypoint in pose.keypoints.items():
+        if float(keypoint.score) > 0:
+            coord = (keypoint.yx[1], keypoint.yx[0])
+            radius = 5
+            col = (0, 0, 255)
+            thickness = 2
+            frame = cv2.circle(frame, coord, radius, col, thickness)
+    return frame
+
+
+def generate():
     while True:
-        svg_canvas = svgwrite.Drawing('', size=(640, 480))
         frame = vc.read()
         frame = imutils.resize(frame, width=640, height=480)
         poses, inference_time = engine.DetectPosesInImage(np.uint8(frame))
@@ -32,8 +43,9 @@ def generator():
         for pose in poses:
             if pose.score < 0.4: continue
             print('\nPose Score: ', pose.score)
-            for label, keypoint in pose.keypoints.items():
-                print(' %-20s x=%-4d y=%-4d score=%.1f' %
-                      (label, keypoint.yx[1], keypoint.yx[0], keypoint.score))
+            frame = draw_image(frame)
 
 
+        by = cv2.imencode('.jpg', frame)[1].tostring()
+        yield (b'--frame\r\n'
+               b'Content-Type: image/jpeg\r\n\r\n' + by + b'\r\n')
