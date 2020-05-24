@@ -42,7 +42,7 @@ def generate():
         for pose in poses:
             if pose.score < 0.4: continue
             print('\nPose Score: ', pose.score)
-            frame = draw_image(frame)
+            frame = draw_image(frame, pose)
 
 
         by = cv2.imencode('.jpg', frame)[1].tostring()
