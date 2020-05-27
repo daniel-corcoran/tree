@@ -6,11 +6,11 @@ import time
 from imutils.video import VideoStream
 
 
-vc = VideoStream(src=0).start()
-time.sleep(2.0)
-
 
 def generate():
+    vc = VideoStream(src=0).start()
+    time.sleep(2.0)
+
     """Video streaming generator function."""
     while True:
         frame = vc.read()

@@ -19,3 +19,11 @@ try:
 
 except:
     print("Could not import periphery lib.")
+    def enable_buzzer():
+        pass
+    def disable_buzzer():
+        pass
+    def set_freq(freq):
+        pass
+    def cooltone():
+        pass

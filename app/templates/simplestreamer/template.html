@@ -1,5 +1,18 @@
 {% extends "view.html" %}
 {%block app_content%}
-<h3>Tree Camera</h3>
-<img src="{{ url_for('video_feed') }}">
+<style>
+    img{
+        width: 61.8%;
+    }
+    #content{
+        text-align:    center;
+        align-content: center;
+    }
+
+</style>
+
+<div id="content">
+    <img src="{{ url_for('video_feed') }}">
+</div>
+
 {% endblock%}
