@@ -12,6 +12,8 @@ from imutils.video import VideoStream
 # images to the webpage.
 
 
+from tools import buzzer
+buzzer.enable()
 
 
 
@@ -22,7 +24,7 @@ time.sleep(2.0)
 engine = PoseEngine('programs/pose_detect/models/mobilenet/posenet_mobilenet_v1_075_481_641_quant_decoder_edgetpu.tflite')
 def make_sounds(y_axis):
     # Presumably, the pitch of the buzzer is based on the y-axis of your arm.
-
+    buzzer.set_freq(y_axis)
 
 
 def draw_image(frame, pose):
@@ -34,6 +36,10 @@ def draw_image(frame, pose):
             col = (0, 0, 255)
             thickness = 2
             frame = cv2.circle(frame, coord, radius, col, thickness)
+
+            print(label, keypoint)
+            if label == 'left wrist':
+                make_sounds(keypoint.yx[0])
     return frame
 
 
