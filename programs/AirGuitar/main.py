@@ -24,7 +24,10 @@ time.sleep(2.0)
 engine = PoseEngine('programs/pose_detect/models/mobilenet/posenet_mobilenet_v1_075_481_641_quant_decoder_edgetpu.tflite')
 def make_sounds(y_axis):
     # Presumably, the pitch of the buzzer is based on the y-axis of your arm.
-    buzzer.set_freq(y_axis)
+    try:
+        buzzer.set_freq(y_axis)
+    except Exception as E:
+        print(y_axis, E)
 
 
 def draw_image(frame, pose):
