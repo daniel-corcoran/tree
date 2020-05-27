@@ -20,9 +20,7 @@ ALLOWED_EXTENSIONS = {'tree'}
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
-
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-
 # Load default app from database
 with open('database/default_app') as f:
     default_app = f.readline()
@@ -31,8 +29,6 @@ print("Default app: {}".format(default_app))
 my_program = importlib.import_module('programs.{}.main'.format(default_app))
 
 ir = False
-
-
 
 
 def list_apps():
@@ -57,6 +53,7 @@ def irTog():
         ir = True
     return init_config()
 
+
 def irOFF():
     LED.IRoff()
 
@@ -80,7 +77,7 @@ def update_helper():
     if p == "Already up to date.":
         return init_config(up_to_date = True)
     else:
-        restart_client()
+        reboot()
 
 
 @app.route("/upload", methods=['GET', 'POST'])
@@ -111,6 +108,8 @@ def upload():
 
 
     # user has uploaded a new file. We need to parse and install it.
+
+
 @app.route("/app_change_request", methods=['GET', 'POST'])
 def app_mod_process():
     x = request.form
@@ -124,7 +123,8 @@ def app_mod_process():
     if do == "switch":
         # Switch target
         switch(target)
-        restart_client()
+        reboot()
+        return render_template('connect.html')
 
     elif do =="uninstall":
         # Uninstall target
@@ -133,7 +133,6 @@ def app_mod_process():
 
 
     return "Check console"
-
 
 
 @app.route("/reboot")
@@ -167,9 +166,6 @@ def init_view():
 
 if __name__ == '__main__':
     LED.green()
-    #
-    # Start the current application as a daemon process
-
     print("Server program has begin. Beginning service.")
     try:
         print("Attempting to open on port 80")
@@ -181,5 +177,6 @@ if __name__ == '__main__':
         #app.run(host='0.0.0.0', port='8000', debug=False,
                 #threaded=False, processes=2, use_reloader=False)
         serve(app, host='0.0.0.0', port=8000)
-
     print("Main sequence closed. The program has ended")
+    LED.blue()
+    exit()
