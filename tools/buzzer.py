@@ -1,6 +1,8 @@
 try:
     from periphery import PWM
     pwm = PWM(2, 0)
+    pwm.frequency = 1
+    pwm.duty_cycle = 1
     def enable_buzzer():
         pwm.enable()
     def disable_buzzer():
