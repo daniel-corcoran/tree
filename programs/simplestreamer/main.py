@@ -18,5 +18,5 @@ def generate():
         cv2.imshow("frame", frame)
         #by = cv2.imencode('.jpg', frame)[1].tostring()
         #yield (b'--frame\r\n'
-               b'Content-Type: image/jpeg\r\n\r\n' + by + b'\r\n')
+        #       b'Content-Type: image/jpeg\r\n\r\n' + by + b'\r\n')
 
