@@ -14,7 +14,7 @@ def generate():
     """Video streaming generator function."""
     while True:
         ret, frame = cap.read()
-        frame = imutils.resize(frame, width=400) # To save bandwidth?
+        #frame = imutils.resize(frame, width=400) # To save bandwidth?
         cv2.imshow("frame", frame)
         #by = cv2.imencode('.jpg', frame)[1].tostring()
         #yield (b'--frame\r\n'
