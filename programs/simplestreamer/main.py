@@ -5,7 +5,7 @@ import datetime
 import time
 from imutils.video import VideoStream
 
-
+# Why is this so slow?
 
 def generate():
     vc = VideoStream(src=0).start()
