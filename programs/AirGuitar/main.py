@@ -25,6 +25,7 @@ engine = PoseEngine('programs/pose_detect/models/mobilenet/posenet_mobilenet_v1_
 def make_sounds(y_axis):
     # Presumably, the pitch of the buzzer is based on the y-axis of your arm.
     try:
+        print("Setting frequency to {}".format(y_axis * 2))
         buzzer.set_freq(y_axis * 2)
     except Exception as E:
         print(y_axis, E)
