@@ -12,8 +12,8 @@ def generate():
     time.sleep(2.0)
 
     """Video streaming generator function."""
-    while True:
-        ret, frame = cap.read()
+    for ret, frame in cap.read()
+        start = time.time()
         #frame = imutils.resize(frame, width=400) # To save bandwidth?
         cv2.imshow("frame", frame)
         #by = cv2.imencode('.jpg', frame)[1].tostring()
@@ -22,5 +22,8 @@ def generate():
 
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
+        end = time.time()
+        print("Capture time: {}".format(end - start)
+
     cap.release()
     cv2.destroyAllWindows()
