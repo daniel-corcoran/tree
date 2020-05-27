@@ -12,9 +12,9 @@ try:
         pwm.frequency = freq
     def cooltone():
         enable_buzzer()
-        for x in range(10):
-            pwm.frequency = (x * 100) + 100
-            time.sleep(0.15)
+        for x in [587.330, 793.989, 880, 1174.66]:
+            pwm.frequency = x
+            time.sleep(0.3)
         disable_buzzer()
 
 except:
