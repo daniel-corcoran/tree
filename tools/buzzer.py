@@ -11,9 +11,11 @@ try:
     def set_freq(freq):
         pwm.frequency = freq
     def cooltone():
+        enable_buzzer()
         for x in range(10):
             pwm.frequency = (x * 100) + 100
             time.sleep(0.15)
+        disable_buzzer()
 
 except:
     print("Could not import periphery lib.")

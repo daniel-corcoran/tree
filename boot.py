@@ -14,7 +14,7 @@ from flask import flash, request, redirect, url_for
 from tools.switch import switch
 
 from tools.uninstall import uninstall
-
+from tools import buzzer
 UPLOAD_FOLDER = 'database/tmp'
 ALLOWED_EXTENSIONS = {'tree'}
 def allowed_file(filename):
@@ -166,6 +166,7 @@ def init_view():
 
 if __name__ == '__main__':
     LED.green()
+    buzzer.cooltone()
     print("Server program has begin. Beginning service.")
     try:
         print("Attempting to open on port 80")
