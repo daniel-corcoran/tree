@@ -13,7 +13,7 @@ from imutils.video import VideoStream
 
 
 from tools import buzzer
-buzzer.enable()
+buzzer.enable_buzzer()
 
 
 
