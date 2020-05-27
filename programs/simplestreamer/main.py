@@ -23,7 +23,7 @@ def generate():
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
         end = time.time()
-        print("Capture time: {}".format(end - start)
+        print("Capture time: {}".format(end - start))
 
     cap.release()
     cv2.destroyAllWindows()
