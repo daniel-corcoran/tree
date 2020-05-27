@@ -12,7 +12,8 @@ def generate():
     time.sleep(2.0)
 
     """Video streaming generator function."""
-    for ret, frame in cap.read():
+    while True:
+        ret, frame = cap.read()
         start = time.time()
         #frame = imutils.resize(frame, width=400) # To save bandwidth?
         cv2.imshow("frame", frame)
