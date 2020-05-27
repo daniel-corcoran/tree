@@ -3,7 +3,7 @@ try:
     import time
     pwm = PWM(2, 0)
     pwm.frequency = 1e3
-    pwm.duty_cycle = 0.9
+    pwm.duty_cycle = 0.5
     def enable_buzzer():
         pwm.enable()
     def disable_buzzer():
