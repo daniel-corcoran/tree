@@ -14,7 +14,7 @@ try:
         enable_buzzer()
         for x in [587.330, 793.989, 880, 1174.66]:
             pwm.frequency = x
-            time.sleep(0.3)
+            time.sleep(0.161)
         disable_buzzer()
 
 except:
