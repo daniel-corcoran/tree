@@ -18,7 +18,7 @@ def generate():
             print("capture time: {}".format(end - start))
 
             start = time.time()
-            frame = imutils.resize(frame, width=100) # To save bandwidth?
+            frame = imutils.resize(frame, width=720) # To save bandwidth?
             #cv2.imshow("frame", frame)
             by = cv2.imencode('.jpg', frame)[1].tostring()
             yield (b'--frame\r\n'
