@@ -77,7 +77,7 @@ def update_helper():
     if p == "Already up to date.":
         return init_config(up_to_date = True)
     else:
-        reboot()
+        return reboot_helper()
 
 
 @app.route("/upload", methods=['GET', 'POST'])

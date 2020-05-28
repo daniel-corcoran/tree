@@ -3,7 +3,7 @@ import os
 import sys
 import psutil
 import logging
-
+from tools.buzzer import disable_buzzer
 import os
 # FIXME: This is not secure. We don't want users to have sudo access.
 
@@ -12,6 +12,7 @@ def power_off():
     print(p)
 
 def reboot():
+    disable_buzzer()
     p = os.system('echo %s|sudo -S %s' % ('mendel', ' sleep 5 && reboot & '))
     print(p)
 

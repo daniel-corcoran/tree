@@ -13,7 +13,6 @@ from imutils.video import VideoStream
 
 
 from tools import buzzer
-buzzer.enable_buzzer()
 
 
 
@@ -33,6 +32,8 @@ def make_sounds(y_axis):
 
 def draw_image(frame, pose):
     # add a pose to the frame, then return the frame.
+
+
     for label, keypoint in pose.keypoints.items():
         if float(keypoint.score) > 0:
             if label == 'left wrist':
@@ -47,10 +48,12 @@ def draw_image(frame, pose):
                 col = (0, 0, 255)
                 thickness = -1
                 frame = cv2.circle(frame, coord, radius, col, thickness)
+                make_sounds(keypoint.yx[1])
     return frame
 
 
 def generate():
+    buzzer.enable_buzzer()
     while True:
         frame = vc.read()
         frame = imutils.resize(frame, width=720, height=540)
