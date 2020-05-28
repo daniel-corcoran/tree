@@ -49,7 +49,6 @@ def draw_image(frame, pose):
                 thickness = -1
                 frame = cv2.circle(frame, coord, radius, col, thickness)
                 make_sounds(keypoint.yx[1])
-    frame = cv2.flip(frame, 1)
     return frame
 
 
@@ -64,7 +63,7 @@ def generate():
             if pose.score < 0.4: continue
             print('\nPose Score: ', pose.score)
             frame = draw_image(frame, pose)
-
+        frame = cv2.flip(frame, 1)
 
         by = cv2.imencode('.jpg', frame)[1].tostring()
         yield (b'--frame\r\n'
