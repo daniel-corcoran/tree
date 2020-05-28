@@ -3,41 +3,21 @@
 <head>
     <title>Tree</title>
 </head>
+<style>
+    #content{
+        text-align:    center;
+        align-content: center;
+    }
+
+</style>
 
 <body>
-<h1>Waiting for new connection...</h1>
+
+<div id="content">
+    <h1>Connecting...</h1>
+    <img src="static/webasset/img/loading.gif"
+</div>
 <script>
-    function ifServerOnline(ifOnline, ifOffline)
-    {
-        var img = document.body.appendChild(document.createElement("img"));
-        img.onload = function()
-        {
-            ifOnline && ifOnline.constructor == Function && ifOnline();
-        };
-        img.onerror = function()
-        {
-            ifOffline && ifOffline.constructor == Function && ifOffline();
-        };
-        img.src = "http://tree.local/static/webasset/img/ping.png";
-    }
-
-    function update()
-    {
-        ifServerOnline(function()
-
-         {
-            console.log("Online code");
-            //  server online code here
-         },
-        function ()
-        {
-            console.log("Offline code");
-            //  server offline code here
-        });
-
-
-    }
-   setInterval (function() { update();}, 500);
-   setTimeout(function(){window.location="http://tree.local";}, 45000) //wait three seconds before continuing.
+   setTimeout(function(){window.location="http://tree.local";}, 38000) //wait three seconds before continuing.
 </script>
 </body>
