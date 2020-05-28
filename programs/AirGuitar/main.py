@@ -41,13 +41,13 @@ def draw_image(frame, pose):
                 radius = 50
                 col = (255, 0, 0)
                 thickness = -1
-                frame = cv2.circle(frame, coord, radius, col, thickness)
+                #frame = cv2.circle(frame, coord, radius, col, thickness)
             elif label == 'right wrist':
                 coord = (keypoint.yx[1], keypoint.yx[0])
                 radius = 50
                 col = (0, 0, 255)
                 thickness = -1
-                frame = cv2.circle(frame, coord, radius, col, thickness)
+                frame = cv2.flip(cv2.circle(frame, coord, radius, col, thickness), 1)
                 make_sounds(keypoint.yx[1])
     return frame
 
