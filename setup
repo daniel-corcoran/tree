@@ -1,17 +1,35 @@
-# Install openCV
-sudo apt-get update
+# Run these commands on the host system.
+# Flash the dev board
+cd $HOME/Downloads
+cd mendel-enterprise-day-13
+mdt reboot-bootloader
+bash flash.sh
+mdt wait-for-device && mdt shell
+
+
+# Remove the old SSH key if any exists
+ssh-keygen -f "/home/daniel/.ssh/known_hosts" -R "tree.local"
+
+### Now we run commands on the coral dev board. Set up wi-fi and change the hostname in NMTUI.
+
+sudo apt-get update && sudo apt-get upgrade
+echo 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCoKMB1BM1DD3FxFoYYTz+gucQm2C7oL2Wq8IH4H8e1QKxwQXveiDcWzLpe+7NV5RvjPhoCEbh7scYD1jnHylxto3P5pURJkgoNk08r8tiZ8qWOaDQBVntwnY+conZVRX5cSwvMyLhAZTKKQkjCphur8tmRDAFPFrvgRLKw2Ebndv3CIVBBHhubLLDPoN2Srilnp5+ZMKqIUhSV+GHffym9S7XQTNApm2Vr7grVOCOfOkEuMcEfwQuYljCeRkI/LT3NIQVH+q0jb6+verFA5NEh6ZpatyslRg0R25qaUkDisNjlPAJjrTEY16hzXFUq4tmf0gmCF4wAsM5pWPfdm+1FI5nG7XDcTskYmoPdcZQqR/LUwU85CBKG/P46NfnNMqhYnWGkuGuw1kEce2TqL6yLDrEP4ZEhEhr+aJsaJOTr3h7+vj7YSUIRpUOn9S3hcksubbptLQT+FXqXYBq5E2h57c9kkiIgKxsGBapLmj1yD48+7RpHzVnitmfC5gqGyVM= daniel@DPC-MSI' >> .ssh/authorized_keys
+pip3 install https://dl.google.com/coral/python/tflite_runtime-2.1.0.post1-cp37-cp37m-linux_aarch64.whl
 sudo apt-get install git build-essential cmake unzip pkg-config libjpeg-dev libpng-dev libtiff-dev libavcodec-dev libavformat-dev libswscale-dev libv4l-dev libxvidcore-dev libx264-dev libgtk-3-dev libatlas-base-dev gfortran python3-dev
-git clone https://github.com/pjalusic/opencv4.1.1-for-google-coral.git
-cp opencv4.1.1-for-google-coral/cv2.so /usr/local/lib/python3.7/dist-packages/cv2.so
-sudo cp -r opencv4.1.1-for-google-coral/libraries/. /usr/local/lib
-sudo pip3 install flask waitress psutil imutils python-periphery
+sudo apt install python3-opencv
+sudo pip3 install flask waitress psutil imutils python-periphery acapture
 sudo pip3 install PyOpenGL-accelerate
 
 
 # Make /etc/rc.local this:
+sudo nano /etc/rc.local
+###############################
 #!/bin/sh -e
 cd home/mendel/tree
 touch hello
 nohup python3 boot.py &
 exit 0
-# These commands must be run as SUDO!
+###############################
+sudo chmod +x /etc/rc.local
+
+git clone sudo https://github.com/daniel-corcoran/tree.git
