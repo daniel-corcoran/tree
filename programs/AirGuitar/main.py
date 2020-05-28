@@ -35,22 +35,25 @@ def draw_image(frame, pose):
     # add a pose to the frame, then return the frame.
     for label, keypoint in pose.keypoints.items():
         if float(keypoint.score) > 0:
-            coord = (keypoint.yx[1], keypoint.yx[0])
-            radius = 5
-            col = (0, 0, 255)
-            thickness = 2
-            frame = cv2.circle(frame, coord, radius, col, thickness)
-
-            print(label, keypoint)
             if label == 'left wrist':
-                make_sounds(keypoint.yx[0])
+                coord = (keypoint.yx[1], keypoint.yx[0])
+                radius = 50
+                col = (255, 0, 0)
+                thickness = 2
+                frame = cv2.circle(frame, coord, radius, col, thickness)
+            elif label == 'right wrist':
+                coord = (keypoint.yx[1], keypoint.yx[0])
+                radius = 50
+                col = (0, 0, 255)
+                thickness = -1
+                frame = cv2.circle(frame, coord, radius, col, thickness)
     return frame
 
 
 def generate():
     while True:
         frame = vc.read()
-        frame = imutils.resize(frame, width=640, height=480)
+        frame = imutils.resize(frame, width=720, height=540)
         poses, inference_time = engine.DetectPosesInImage(np.uint8(frame))
         print('Inference time: %.fms' % inference_time)
         for pose in poses:
