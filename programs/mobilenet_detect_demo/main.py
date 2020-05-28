@@ -26,6 +26,7 @@ vs = VideoStream(src=0).start()
 #vs = VideoStream(usePiCamera=False).start()
 time.sleep(2.0)
 def generate():
+	#####
 # loop over the frames from the video stream
 	while True:
 		# grab the frame from the threaded video stream and resize it
