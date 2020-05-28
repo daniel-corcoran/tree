@@ -20,7 +20,7 @@ for row in open('programs/mobilenet_demo/mobilenet_v2/imagenet_labels.txt'):
 
 # load the Google Coral classification model
 print("[INFO] loading Coral model...")
-model = DetectionEngine('programs/mobilenet_demo/mobilenet_v2/mobilenet_v2_1.0_224_quant_edgetpu.tflite')
+model = ClassificationEngine('programs/mobilenet_demo/mobilenet_v2/mobilenet_v2_1.0_224_quant_edgetpu.tflite')
 
 # initialize the video stream and allow the camera sensor to warmup
 print("[INFO] starting video stream...")
