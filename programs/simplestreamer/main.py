@@ -21,14 +21,8 @@ def generate():
         start = time.time()
         frame = imutils.resize(frame, width=100) # To save bandwidth?
         cv2.imshow("frame", frame)
-        #by = cv2.imencode('.jpg', frame)[1].tostring()
-        #yield (b'--frame\r\n'
-        #       b'Content-Type: image/jpeg\r\n\r\n' + by + b'\r\n')
+        by = cv2.imencode('.jpg', frame)[1].tostring()
+        yield (b'--frame\r\n'
+               b'Content-Type: image/jpeg\r\n\r\n' + by + b'\r\n')
 
-        if cv2.waitKey(1) & 0xFF == ord('q'):
-            break
-        end = time.time()
         print("Process and display time: {}".format(end - start))
-
-    cap.release()
-    cv2.destroyAllWindows()
