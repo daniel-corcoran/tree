@@ -39,7 +39,7 @@ def draw_image(frame, pose):
                 coord = (keypoint.yx[1], keypoint.yx[0])
                 radius = 50
                 col = (255, 0, 0)
-                thickness = 2
+                thickness = -1
                 frame = cv2.circle(frame, coord, radius, col, thickness)
             elif label == 'right wrist':
                 coord = (keypoint.yx[1], keypoint.yx[0])
