@@ -1,34 +1,52 @@
 <!-- Template for installing, uninstalling, and switching installed apps -->
 {% extends "base.html" %}
 {% block link %}
+<a href="/power_off">📴</a>
+<a href="/reboot">🔃</a>
+<a href="IRtog">💡</a>
 <a href="/view">📹</a>
 {% endblock %}
 
 {% block content %}
-<hr>
+<link rel="stylesheet" type="text/css" href="static/webasset/css/config.css">
+
 <div id="install_app_div">
-    <form action="/upload" method=post enctype="multipart/form-data">
-        <input type=file name=file>
-        <input type="submit" value="Upload application">
-    </form>
+
 </div>
+
 <hr>
 <div id="app_config_div" >
-    <h5>Current running app: </h5> <p>{{ current_app }}</p>
+    <h5>Currently running</h5>
+    <div class="app-upload">
+        <form action="/upload" method=post enctype="multipart/form-data">
+            <img src="static/appstatic/icon/{{ current_app }}.png">
+            <label for="file-input">
+            <img src="static/webasset/img/add_app.png">
+            </label>
+            <input type=file name=file id="file-input">
+        </form>
+
+    </div>
+
+
+
+
     <h5>Installed apps:</h5>
 
     <form action = '/app_change_request' method = "post" enctype="multipart/form-data">
+
         {% for item in list_apps %}
-            <p>{{ item }}<input type="submit" name="switch {{ item }}" value="Run" id="switch">
-                <input type="submit" name="uninstall {{ item }}" value="Uninstall" id="uninstall"></p>
+            <label for="uninstall-{{item}}">
+                <img src="static/webasset/img/uninstall_app.png">
+            </label>
+            <input type="image" src="static/appstatic/icon/{{item}}.png" name="switch {{ item }}" id="switch">
+            <div class = 'app-uninstall'>
+                <input type="submit" name="uninstall {{ item }}" value="Uninstall" id="uninstall-{{item}}"></p>
+            </div>
         {% endfor %}
     </form>
-
-
-
     <!--List installed apps and set active / uninstall specific apps -->
 </div>
-
 
 <hr>
 

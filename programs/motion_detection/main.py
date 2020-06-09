@@ -9,20 +9,24 @@ import threading
 
 vs = VideoStream(src=0).start()
 time.sleep(2.0)
-
+outputFrame = None
 lock = threading.Lock()
 
 def generate():
+    print("Hello world")
     # grab global references to the output frame and lock variables
     global outputFrame, lock
 
     # loop over frames from the output stream
     while True:
+        print("while true")
         # wait until the lock is acquired
         with lock:
+            print("With lock")
             # check if the output frame is available, otherwise skip
             # the iteration of the loop
             if outputFrame is None:
+                print("Continue")
                 continue
 
             # encode the frame in JPEG format
@@ -141,3 +145,7 @@ def thread(frameCount = 32):
         with lock:
             outputFrame = frame.copy()
 
+t = threading.Thread(target=thread, args=(
+		32,))
+t.daemon = True
+t.start()

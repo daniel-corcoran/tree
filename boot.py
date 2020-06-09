@@ -25,17 +25,18 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 with open('database/default_app') as f:
     default_app = f.readline()
 print("Default app: {}".format(default_app))
-
-my_program = importlib.import_module('programs.{}.main'.format(default_app))
-
+try:
+    my_program = importlib.import_module('programs.{}.main'.format(default_app))
+except Exception as E:
+    my_program = importlib.import_module('programs.simplestreamer.main')
+    print("Loaded simplestreamer because main module wasn't working.")
+    print("Exception: {}".format(E))
 ir = False
 
 
 def list_apps():
     list_of_apps = os.listdir('programs')
-
     new_l = []
-
     for x in list_of_apps:
         if x != "__pycache__" and x != default_app:
             new_l.append(x)
@@ -82,6 +83,7 @@ def update_helper():
 
 @app.route("/upload", methods=['GET', 'POST'])
 def upload():
+
     LED.blue()
     if request.method == 'POST':
         # check if the post request has the file part
@@ -101,6 +103,8 @@ def upload():
         else:
             print("Not allowed")
         return render_template("upload.html")
+
+    # TODO: Call "Install" function on the uploaded application
     # Save uploaded files to /database/tmp/*.tree
     # Extract template file(s) to /app/templates/*/template.html
     # Extract everything else to /programs/*/

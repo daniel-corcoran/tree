@@ -1,0 +1,14 @@
+#app_config_div {
+    text-align: center;
+    align-content: center;
+
+}
+
+.app-upload input {
+  display: none;
+    visibility: hidden;
+}
+.app-uninstall input {
+    display: none;
+    visibility: hidden;
+}
