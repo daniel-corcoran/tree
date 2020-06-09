@@ -60,30 +60,6 @@
 </div>
 
 <hr>
-
-<div id="ir_settings_div">
-    <h3>Night Vision</h3>
-    {% if ir == True %}
-        <form action="/IRtog">
-            <input type="submit" value="Turn off">
-        </form>
-    {% else %}
-        <form action="/IRtog">
-            <input type="submit" value="Turn on">
-        </form>
-    {% endif %}
-
-</div>
-<hr>
-<div id="power_settings_div">
-    <h3>Device power</h3>
-    <form action="/reboot">
-        <input type="submit" value="Reboot" />
-    </form>
-    <form action="/power_off">
-        <input type="submit" value="Power off" />
-    </form>
-</div>
-<h5>Software build 0.1. Copyright 2020 Daniel P. Corcoran.</h5>
+<h5>Software build 0.2. Copyright 2020 Tree Camera, Inc.</h5>
 {% endblock %}
 
