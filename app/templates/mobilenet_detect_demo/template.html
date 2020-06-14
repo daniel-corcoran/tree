@@ -20,7 +20,7 @@
 <form action = '/update_checkbox' method = "post" enctype = "multipart/form-data">
      <input type="submit" name="update" value="update" id="submit"></p>
      {% for item in labels %}
-     <input type="checkbox" id="{{ item }}" name="{{ item }}" value="{{ item }}">
+     <h5>{{ item }} </h5><input type="checkbox" id="{{ item }}" name="{{ item }}" value="{{ item }}"> <br>
      {% endfor %}
 </form>
 </div>
