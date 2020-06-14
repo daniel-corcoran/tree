@@ -21,7 +21,7 @@ time.sleep(2.0)
 
 whitelist = []
 
-beep_mode = False=[]
+beep_mode = False
 
 def generate():
 	#####
