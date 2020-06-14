@@ -19,7 +19,7 @@ model = DetectionEngine('programs/mobilenet_detect_demo/mobilenet_ssd_v2/mobilen
 vs = VideoStream(src=0).start()
 time.sleep(2.0)
 
-global whitelist = []
+whitelist = []
 
 
 def generate():
