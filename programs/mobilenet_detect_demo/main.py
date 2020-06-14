@@ -72,3 +72,4 @@ def update_checkbox():
 	cmd = [i for i in x]
 	print(cmd)
 	return render_template('mobilenet_detect_demo/template.html', labels = [labels[x] for x in labels])
+# dddd
