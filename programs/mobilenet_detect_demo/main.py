@@ -66,6 +66,9 @@ def generate():
 def update_checkbox():
 	print("Fixme")
 	x = request.form
+	print("Selected elements")
+	for i in list(x):
+		print("i")
 	cmd = [i for i in x]
 	print(cmd)
-	return render_template('/mobilenet_detect_demo/template.html', labels = [labels[x] for x in labels])
+	return render_template('mobilenet_detect_demo/template.html', labels = [labels[x] for x in labels])
