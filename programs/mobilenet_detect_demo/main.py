@@ -19,7 +19,7 @@ model = DetectionEngine('programs/mobilenet_detect_demo/mobilenet_ssd_v2/mobilen
 vs = VideoStream(src=0).start()
 time.sleep(2.0)
 
-
+whitelist = []
 
 
 def generate():
@@ -49,14 +49,14 @@ def generate():
 			box = r.bounding_box.flatten().astype("int")
 			(startX, startY, endX, endY) = box
 			label = labels[r.label_id]
-
-			# draw the bounding box and label on the image
-			cv2.rectangle(orig, (startX, startY), (endX, endY),
-						  (0, 255, 0), 2)
-			y = startY - 15 if startY - 15 > 15 else startY + 15
-			text = "{}: {:.2f}%".format(label, r.score * 100)
-			cv2.putText(orig, text, (startX, y),
-						cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
+			if label in whitelist:
+				# draw the bounding box and label on the image
+				cv2.rectangle(orig, (startX, startY), (endX, endY),
+							  (0, 255, 0), 2)
+				y = startY - 15 if startY - 15 > 15 else startY + 15
+				text = "{}: {:.2f}%".format(label, r.score * 100)
+				cv2.putText(orig, text, (startX, y),
+							cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
 
 		cv2.imwrite('pic.jpg', orig)
 		yield (b'--frame\r\n'
@@ -68,7 +68,8 @@ def update_checkbox():
 	x = request.form
 	print("Selected elements")
 	for i in list(x):
-		print("i")
+		print(i)
+	whitelist = list(x)
 	cmd = [i for i in x]
 	print(cmd)
 	return render_template('mobilenet_detect_demo/template.html', labels = [labels[x] for x in labels])
