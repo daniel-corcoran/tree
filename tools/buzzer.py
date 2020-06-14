@@ -16,7 +16,12 @@ try:
             pwm.frequency = x
             time.sleep(0.161)
         disable_buzzer()
-
+    def b_tone():
+        enable_buzzer()
+        for x in [1174.66, 880,  793.989, 587.330]:
+            pwm.frequency = x
+            time.sleep(0.161)
+        disable_buzzer()
 except:
     print("Could not import periphery lib.")
     def enable_buzzer():

@@ -6,7 +6,7 @@ import time
 import cv2
 from flask import request, render_template
 from app import app
-
+from tools.buzzer import b_tone
 confidence = 0.3
 # initialize the labels dictionary
 print("[INFO] parsing class labels...")
@@ -21,6 +21,7 @@ time.sleep(2.0)
 
 whitelist = []
 
+beep_mode = True
 
 def generate():
 	#####
@@ -50,6 +51,8 @@ def generate():
 			(startX, startY, endX, endY) = box
 			label = labels[r.label_id]
 			if label in whitelist:
+				if beep_mode:
+					b_tone()
 				# draw the bounding box and label on the image
 				cv2.rectangle(orig, (startX, startY), (endX, endY),
 							  (0, 255, 0), 2)
