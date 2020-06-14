@@ -65,7 +65,7 @@ def generate():
 		yield (b'--frame\r\n'
 			   b'Content-Type: image/jpeg\r\n\r\n' + open('pic.jpg', 'rb').read() + b'\r\n')
 
-@app.route('/beeptoggle')
+@app.route('/beeptoggle',  methods=["GET", "POST"])
 def beep_toggle():
 	global beep_mode
 	beep_mode = not beep_mode
