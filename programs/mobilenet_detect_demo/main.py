@@ -21,7 +21,7 @@ time.sleep(2.0)
 
 whitelist = []
 
-beep_mode = True
+beep_mode = False=[]
 
 def generate():
 	#####
@@ -64,6 +64,13 @@ def generate():
 		cv2.imwrite('pic.jpg', orig)
 		yield (b'--frame\r\n'
 			   b'Content-Type: image/jpeg\r\n\r\n' + open('pic.jpg', 'rb').read() + b'\r\n')
+
+@app.route('/beeptoggle')
+def beep_toggle():
+	global beep_mode
+	beep_mode = not beep_mode
+	return render_template('mobilenet_detect_demo/template.html', labels=[labels[x] for x in labels])
+
 
 @app.route('/update_checkbox', methods=["GET", "POST"])
 def update_checkbox():

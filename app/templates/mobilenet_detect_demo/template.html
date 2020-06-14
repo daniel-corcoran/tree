@@ -16,7 +16,9 @@
 
 <h3>Mobilenet V2 Box Detection</h3>
 <h5>This app demonstrates the MobileNetV2 Architecture. <br> You can read the paper for it <a href="https://arxiv.org/abs/1801.04381">here.</a></h5>
-
+<form action = '/beeptoggle' method = "post" enctype = "multipart/form-data">
+     <input type="submit" name="update" value="Toggle beep" id="submit"></p>
+</form>
 <form action = '/update_checkbox' method = "post" enctype = "multipart/form-data">
      <input type="submit" name="update" value="update" id="submit"></p>
      {% for item in labels %}
