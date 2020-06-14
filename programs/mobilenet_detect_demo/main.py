@@ -19,7 +19,7 @@ model = DetectionEngine('programs/mobilenet_detect_demo/mobilenet_ssd_v2/mobilen
 vs = VideoStream(src=0).start()
 time.sleep(2.0)
 
-whitelist = []
+global whitelist = []
 
 
 def generate():
@@ -69,6 +69,7 @@ def update_checkbox():
 	print("Selected elements")
 	for i in list(x):
 		print(i)
+	global whitelist
 	whitelist = list(x)
 	cmd = [i for i in x]
 	print(cmd)
