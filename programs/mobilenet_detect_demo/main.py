@@ -4,27 +4,24 @@ from PIL import Image
 import imutils
 import time
 import cv2
+from flask import request, render_template
+from app import app
 
 confidence = 0.3
 # initialize the labels dictionary
 print("[INFO] parsing class labels...")
 labels = {}
-
-# loop over the class labels file
 for row in open('programs/mobilenet_detect_demo/mobilenet_ssd_v2/coco_labels.txt'):
 	# unpack the row and update the labels dictionary
 	(classID, label) = row.strip().split(maxsplit=1)
 	labels[int(classID)] = label.strip()
-
-# load the Google Coral classification model
-print("[INFO] loading Coral model...")
 model = DetectionEngine('programs/mobilenet_detect_demo/mobilenet_ssd_v2/mobilenet_ssd_v2_coco_quant_postprocess_edgetpu.tflite')
-
-# initialize the video stream and allow the camera sensor to warmup
-print("[INFO] starting video stream...")
 vs = VideoStream(src=0).start()
-#vs = VideoStream(usePiCamera=False).start()
 time.sleep(2.0)
+
+
+
+
 def generate():
 	#####
 # loop over the frames from the video stream
@@ -65,3 +62,10 @@ def generate():
 		yield (b'--frame\r\n'
 			   b'Content-Type: image/jpeg\r\n\r\n' + open('pic.jpg', 'rb').read() + b'\r\n')
 
+@app.route('/update_checkbox', methods=["GET", "POST"])
+def update_checkbox():
+	print("Fixme")
+	x = request.form
+	cmd = [i for i in x]
+	print(cmd)
+	return render_template('/view.html', labels = [labels[x] for x in labels])
