@@ -32,7 +32,7 @@
 <script language="JavaScript">
 function toggle(source) {
   checkboxes = document.getElementsByName('check_box');
-  for(var checkbox in checkboxes)
+  for(let checkbox of checkboxes)
     checkbox.checked = source.checked;
 }
 </script>
