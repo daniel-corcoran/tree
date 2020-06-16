@@ -41,7 +41,7 @@ def generate():
 
 		# make predictions on the input frame
 		start = time.time()
-		results = model.DetectWithImage(frame, threshold=confidence,
+		results = model.detect_with_image(frame, threshold=confidence,
 										keep_aspect_ratio=True, relative_coord=False)
 		end = time.time()
 		# ensure at least one result was found
