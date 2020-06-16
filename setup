@@ -6,11 +6,12 @@ mdt reboot-bootloader
 bash flash.sh
 mdt wait-for-device && mdt shell
 
-
 # Remove the old SSH key if any exists
 ssh-keygen -f "/home/daniel/.ssh/known_hosts" -R "tree.local"
 
 ### Now we run commands on the coral dev board. Set up wi-fi and change the hostname in NMTUI.
+
+### FIXME: Add swap file before installing dlib. Needs 2GB.
 
 sudo apt-get update && sudo apt-get upgrade
 echo 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCoKMB1BM1DD3FxFoYYTz+gucQm2C7oL2Wq8IH4H8e1QKxwQXveiDcWzLpe+7NV5RvjPhoCEbh7scYD1jnHylxto3P5pURJkgoNk08r8tiZ8qWOaDQBVntwnY+conZVRX5cSwvMyLhAZTKKQkjCphur8tmRDAFPFrvgRLKw2Ebndv3CIVBBHhubLLDPoN2Srilnp5+ZMKqIUhSV+GHffym9S7XQTNApm2Vr7grVOCOfOkEuMcEfwQuYljCeRkI/LT3NIQVH+q0jb6+verFA5NEh6ZpatyslRg0R25qaUkDisNjlPAJjrTEY16hzXFUq4tmf0gmCF4wAsM5pWPfdm+1FI5nG7XDcTskYmoPdcZQqR/LUwU85CBKG/P46NfnNMqhYnWGkuGuw1kEce2TqL6yLDrEP4ZEhEhr+aJsaJOTr3h7+vj7YSUIRpUOn9S3hcksubbptLQT+FXqXYBq5E2h57c9kkiIgKxsGBapLmj1yD48+7RpHzVnitmfC5gqGyVM= daniel@DPC-MSI' >> .ssh/authorized_keys
@@ -19,6 +20,7 @@ sudo apt-get install git build-essential cmake unzip pkg-config libjpeg-dev libp
 sudo apt install python3-opencv
 sudo pip3 install flask waitress psutil imutils python-periphery acapture
 sudo pip3 install PyOpenGL-accelerate
+sudo pip3 install dlib face_recognition
 
 
 # Make /etc/rc.local this:
