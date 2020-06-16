@@ -21,9 +21,19 @@
 </form>
 <form action = '/update_checkbox' method = "post" enctype = "multipart/form-data">
      <input type="submit" name="update" value="update" id="submit"></p>
+     <input type="checkbox" onClick="toggle(this)" /> Toggle All<br/>
      {% for item in labels %}
-     <h5>{{ item }} <input type="checkbox" id="{{ item }}" name="{{ item }}" value="{{ item }}"></h5><br>
+     <h5>{{ item }} <input type="checkbox" id="{{ item }}" name="check_box" value="{{ item }}"></h5><br>
      {% endfor %}
 </form>
 </div>
+
+
+<script language="JavaScript">
+function toggle(source) {
+  checkboxes = document.getElementsByName('check_box');
+  for(var checkbox in checkboxes)
+    checkbox.checked = source.checked;
+}
+</script>
 {% endblock%}
