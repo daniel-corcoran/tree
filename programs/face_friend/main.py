@@ -90,7 +90,7 @@ def generate():
         queue = queue[1:]
         print(queue)
 
-        if queue = [['Unknown'],['Unknown'],['Unknown']]:
+        if queue == [['Unknown'],['Unknown'],['Unknown']]:
             print("Sending text. Three unknowns detected in a row.exit"
                   "")
 
