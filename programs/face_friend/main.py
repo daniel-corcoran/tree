@@ -27,6 +27,7 @@ vs = VideoStream(src=0).start()
 # vs = VideoStream(usePiCamera=True).start()
 time.sleep(2.0)
 
+queue = [None, None, None]
 # start the FPS counter
 fps = FPS().start()
 
@@ -85,6 +86,13 @@ def generate():
 
             # update the list of names
             names.append(name)
+        queue.append(names)
+        queue = queue[1:]
+        print(queue)
+
+        if queue = [['Unknown'],['Unknown'],['Unknown']]:
+            print("Sending text. Three unknowns detected in a row.exit"
+                  "")
 
         # loop over the recognized faces
         for ((top, right, bottom, left), name) in zip(boxes, names):
