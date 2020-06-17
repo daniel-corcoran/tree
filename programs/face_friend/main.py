@@ -1,22 +1,13 @@
-from imutils import paths
-import face_recognition
-import argparse
-import pickle
-import cv2
-import os
-from flask import request, render_template
-from app import app
-from tools.buzzer import b_tone
 from imutils.video import VideoStream
 from imutils.video import FPS
 import face_recognition
-import argparse
 import imutils
 import pickle
-import time
 import cv2
-
-# FIXME: Add path extention to these two
+from twilio.rest import Client
+account_sid = 'AC187864d6bb8a603665d83632571f02cc'
+auth_token = '3d7951e1fc7ef42813c4e44ec9417654'
+client = Client(account_sid, auth_token)
 
 data = pickle.loads(open('programs/face_friend/encodings.pickle', "rb").read())
 detector = cv2.CascadeClassifier('programs/face_friend/haarcascade_frontalface_default.xml')
@@ -25,7 +16,6 @@ detector = cv2.CascadeClassifier('programs/face_friend/haarcascade_frontalface_d
 print("[INFO] starting video stream...")
 vs = VideoStream(src=0).start()
 # vs = VideoStream(usePiCamera=True).start()
-time.sleep(2.0)
 
 queue = [None, None, None]
 # start the FPS counter
@@ -92,8 +82,16 @@ def generate():
         print(queue)
 
         if queue == [['Unknown'],['Unknown'],['Unknown']]:
-            print("Sending text. Three unknowns detected in a row.exit"
-                  "")
+            # Send a text
+            message = client.messages \
+                .create(
+                body="Tree Camera detected an unknown face.",
+                media_url='pic.jpg',
+                from_='+12058968162',
+                to='+15138509006'
+            )
+
+            print(message.sid)
 
         # loop over the recognized faces
         for ((top, right, bottom, left), name) in zip(boxes, names):
