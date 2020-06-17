@@ -14,7 +14,7 @@ tw_client = Client(tw_account_sid, tw_auth_token)
 im_client_id = 'd6464f94c8eea45'
 im_client_secret = 'db8c63ebe9477b934333a8f27fded489252a5e97'
 
-im_client = ImgurClient(client_id, client_secret)
+im_client = ImgurClient(im_client_id, im_client_secret)
 
 
 
