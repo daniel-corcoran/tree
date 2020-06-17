@@ -5,9 +5,18 @@ import imutils
 import pickle
 import cv2
 from twilio.rest import Client
-account_sid = 'AC187864d6bb8a603665d83632571f02cc'
-auth_token = '3d7951e1fc7ef42813c4e44ec9417654'
-client = Client(account_sid, auth_token)
+from imgurpython import ImgurClient
+
+tw_account_sid = 'AC187864d6bb8a603665d83632571f02cc'
+tw_auth_token = '3d7951e1fc7ef42813c4e44ec9417654'
+tw_client = Client(tw_account_sid, tw_auth_token)
+
+im_client_id = 'd6464f94c8eea45'
+im_client_secret = 'db8c63ebe9477b934333a8f27fded489252a5e97'
+
+im_client = ImgurClient(client_id, client_secret)
+
+
 
 data = pickle.loads(open('programs/face_friend/encodings.pickle', "rb").read())
 detector = cv2.CascadeClassifier('programs/face_friend/haarcascade_frontalface_default.xml')
@@ -82,17 +91,23 @@ def generate():
         print(queue)
 
         if queue == [['Unknown'],['Unknown'],['Unknown']]:
-            # Send a text
-            message = client.messages \
-                .create(
-                body="Tree Camera detected an unknown face.",
-                media_url='pic.jpg',
-                from_='+12058968162',
-                to='+15138509006'
-            )
+            try:
+                im = im_client.upload_from_path('pic.jpg')
+                url = im['link']
 
-            print(message.sid)
 
+                # Send a text
+                message = tw_client.messages \
+                    .create(
+                    body="Tree Camera detected an unknown face.",
+                    media_url=url,
+                    from_='+12058968162',
+                    to='+15138509006'
+                )
+
+                print(message.sid)
+            except Exception as E:
+                print(E)
         # loop over the recognized faces
         for ((top, right, bottom, left), name) in zip(boxes, names):
             # draw the predicted face name on the image
