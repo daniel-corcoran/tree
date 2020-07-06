@@ -14,7 +14,9 @@ from flask import flash, request, redirect, url_for
 from tools.switch import switch
 
 from tools.uninstall import uninstall
+from tools.install import install
 from tools import buzzer
+app.secret_key = 'hello'
 UPLOAD_FOLDER = 'database/tmp'
 ALLOWED_EXTENSIONS = {'tree'}
 def allowed_file(filename):
@@ -83,7 +85,7 @@ def update_helper():
 
 @app.route("/upload", methods=['GET', 'POST'])
 def upload():
-
+    print("File uploaded")
     LED.blue()
     if request.method == 'POST':
         # check if the post request has the file part
@@ -100,17 +102,18 @@ def upload():
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            install(filename)
+
         else:
             print("Not allowed")
-        return render_template("upload.html")
-
+        return init_config()
+    else:
+        return 'there was an error. Error: POST method required to install applications. '
     # TODO: Call "Install" function on the uploaded application
     # Save uploaded files to /database/tmp/*.tree
     # Extract template file(s) to /app/templates/*/template.html
     # Extract everything else to /programs/*/
     # That's it!!!
-
-
     # user has uploaded a new file. We need to parse and install it.
 
 
@@ -133,7 +136,9 @@ def app_mod_process():
     elif do =="uninstall":
         # Uninstall target
         uninstall(target)
-        return init_config
+        return init_config()
+    else:
+        print(do)
 
 
     return "Check console"

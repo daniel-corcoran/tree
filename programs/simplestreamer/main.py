@@ -1,9 +1,7 @@
-# import the necessary packages
 import imutils
 import cv2
 import time
 import acapture
-# Why is this so slow?
 
 def generate():
     cap = acapture.open(0)

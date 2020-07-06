@@ -18,12 +18,12 @@
 <div id="app_config_div" >
     <h5>Currently running</h5>
     <div class="app-upload">
-        <form action="/upload" method=post enctype="multipart/form-data">
+        <form id='install-form' action="/upload" method="POST" enctype="multipart/form-data">
             <img src="static/appstatic/icon/{{ current_app }}.png">
             <label for="file-input">
             <img src="static/webasset/img/add_app.png">
             </label>
-            <input type=file name=file id="file-input">
+            <input id="file-input" name=file type="file" onchange="this.form.submit()">
         </form>
 
     </div>
