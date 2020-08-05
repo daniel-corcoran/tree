@@ -4,7 +4,7 @@ import wget, json, base64, os
 from tools.install import install
 from tools.misc import default_app
 from tools.misc import list_apps
-store_ip = '0.0.0.0:8001'
+store_ip = 'treecamera.xyz:8001'
 
 categories = {
               1: 'Home and Kitchen',
