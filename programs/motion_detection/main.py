@@ -6,11 +6,18 @@ import datetime
 import time
 from imutils.video import VideoStream
 import threading
-
+from app import app
+from flask import Response
 vs = VideoStream(src=0).start()
-time.sleep(2.0)
+time.sleep(.5)
 outputFrame = None
 lock = threading.Lock()
+
+
+@app.route("/video_feed")
+def video_feed():
+    return Response(generate(),
+                    mimetype="multipart/x-mixed-replace; boundary=frame")
 
 def generate():
     print("Hello world")

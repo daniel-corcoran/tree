@@ -1,34 +1,40 @@
 <!-- Template for installing, uninstalling, and switching installed apps -->
 {% extends "base.html" %}
 {% block link %}
+    <div id="netui_img">
+    <img id=net_img src='static/webasset/img/load_mini.gif' style='width: 25px; visibility: hidden;'>
+
+    </div>
 <a href="/power_off">📴</a>
 <a href="/reboot">🔃</a>
-<a href="IRtog">💡</a>
+<!--<a href="IRtog">💡</a>-->
+
+<a href="/{{ netui_dir }}" id="netui" onclick="loadicon()">📶</a>
+
 <a href="/view">📹</a>
 {% endblock %}
 
 {% block content %}
-<link rel="stylesheet" type="text/css" href="static/webasset/css/config.css">
+    <link rel="stylesheet" type="text/css" href="static/webasset/css/config.css">
+
+    <img id=netui_img src='static/webasset/img/load_mini.gif' style='width: 25px; visibility: hidden;'>
 
 <div id="install_app_div">
-
 </div>
+    {{ netui | safe }}
 
 <hr>
 <div id="app_config_div" >
+
     <h5>Currently running</h5>
     <div class="app-upload">
         <form id='install-form' action="/upload" method="POST" enctype="multipart/form-data">
             <img src="static/appstatic/icon/{{ current_app }}.png">
-            <label for="file-input">
-            <img src="static/webasset/img/add_app.png">
-            </label>
-            <input id="file-input" name=file type="file" onchange="this.form.submit()">
+            <a href="/store"><img src="static/webasset/img/app_store.jpg"></a>
+
         </form>
 
     </div>
-
-
 
 
     <h5>Installed apps:</h5>
@@ -46,7 +52,7 @@
         {% endfor %}
     </form>
     <!--List installed apps and set active / uninstall specific apps -->
-</div>
+
 
 <hr>
 
@@ -60,6 +66,24 @@
 </div>
 
 <hr>
-<h5>Software build 0.2. Copyright 2020 Tree Camera, Inc.</h5>
+<p>Software build 0.3<br> Copyright 2020 Tree Camera, Inc.</p>
+</div>
+<script>
+    function loadicon(){
+        document.getElementById('netui_img').style.visibility = 'visible'
+        document.getElementById('netui').innerHTML = document.getElementById('netui_img').innerHTML
+
+    }
+
+
+
+</script>
+
+
+
+
+
+
 {% endblock %}
+
 

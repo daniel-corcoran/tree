@@ -9,13 +9,13 @@ from tools import LED
 import importlib
 import os
 from werkzeug.utils import secure_filename
-
 from flask import flash, request, redirect, url_for
 from tools.switch import switch
-
 from tools.uninstall import uninstall
 from tools.install import install
 from tools import buzzer
+from tools.misc import list_apps
+import tools.networkui
 app.secret_key = 'hello'
 UPLOAD_FOLDER = 'database/tmp'
 ALLOWED_EXTENSIONS = {'tree'}
@@ -36,25 +36,9 @@ except Exception as E:
 ir = False
 
 
-def list_apps():
-    list_of_apps = os.listdir('programs')
-    new_l = []
-    for x in list_of_apps:
-        if x != "__pycache__" and x != default_app:
-            new_l.append(x)
-    return new_l
 
 
-@app.route("/IRtog")
-def irTog():
-    global ir
-    if ir:
-        irOFF()
-        ir = False
-    else:
-        irON()
-        ir = True
-    return init_config()
+
 
 
 def irOFF():
@@ -64,11 +48,6 @@ def irOFF():
 def irON():
     LED.IRon()
 
-
-@app.route("/video_feed")
-def video_feed():
-    return Response(my_program.generate(),
-                    mimetype="multipart/x-mixed-replace; boundary=frame")
 
 
 @app.route("/update")
@@ -108,13 +87,8 @@ def upload():
             print("Not allowed")
         return init_config()
     else:
+        print(request.method)
         return 'there was an error. Error: POST method required to install applications. '
-    # TODO: Call "Install" function on the uploaded application
-    # Save uploaded files to /database/tmp/*.tree
-    # Extract template file(s) to /app/templates/*/template.html
-    # Extract everything else to /programs/*/
-    # That's it!!!
-    # user has uploaded a new file. We need to parse and install it.
 
 
 @app.route("/app_change_request", methods=['GET', 'POST'])
@@ -165,7 +139,7 @@ def home_page():
 @app.route('/config')
 def init_config(up_to_date=False):
     x = list_apps()
-    return render_template('config.html', list_apps = x, current_app = default_app, up_to_date = up_to_date, ir=ir)
+    return render_template('config.html', list_apps = x, current_app = default_app, up_to_date = up_to_date, ir=ir, netui_dir = 'netui')
 
 
 @app.route('/view')

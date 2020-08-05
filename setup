@@ -20,7 +20,7 @@ sudo apt-get install git build-essential cmake unzip pkg-config libjpeg-dev libp
 sudo apt install python3-opencv
 sudo pip3 install flask waitress psutil imutils python-periphery acapture
 sudo pip3 install PyOpenGL-accelerate
-sudo pip3 install dlib face_recognition
+sudo pip3 install dlib face_recognition wget
 
 
 # Make /etc/rc.local this:
